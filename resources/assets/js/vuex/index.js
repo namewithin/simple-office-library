@@ -1,10 +1,13 @@
-
 import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
 
-var debug = true;
+const debug = process.env.NODE_ENV !== 'production';
+
 const store = new Vuex.Store({
+    state: {
+        count: 0
+    },
     modules: {},
     strict: debug
 

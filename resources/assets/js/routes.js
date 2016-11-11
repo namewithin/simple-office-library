@@ -9,7 +9,7 @@ const routes =
         {
             name: 'home',
             path: '/',
-            component: require('./components/Example.vue'),
+            component: require('./components/Main.vue'),
             meta: {auth: false}
         },
 
