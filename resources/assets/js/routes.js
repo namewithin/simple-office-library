@@ -1,7 +1,3 @@
-/**
- * Created by namewithin on 11.11.16.
- */
-
 const routes =
     [
         // {
