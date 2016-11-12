@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/auth/callback', function () {
+    print_r($_POST);
+});
+Route::get('/auth/user', function () {
+    return [
+        'name'  => 'leo',
+        'email' => 'leo@pdffiller.com'
+    ];
+});

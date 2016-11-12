@@ -9,8 +9,14 @@
 </head>
 <body>
 <div id="app">
-    <router-view></router-view>
+    <main-component></main-component>
 </div>
+<script>
+    window.Laravel = {
+        csrfToken: "{{ csrf_token() }}"
+    };
+</script>
+<script src="https://cdn.auth0.com/js/lock/10.5/lock.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>

@@ -1,17 +1,24 @@
 const routes =
     [
-        // {
-        //     name: 'login',
-        //     path: '/login',
-        //     component: require('./components/pages/auth/Login.vue'),
-        //     meta: {auth: false}
-        // },
+        {
+            name: 'login',
+            path: '/login',
+            component: require('./components/Login.vue'),
+            meta: {auth: false}
+        },
         {
             name: 'home',
             path: '/',
-            component: require('./components/Main.vue'),
+            exact: true,
+            component: require('./components/Book/List.vue'),
             meta: {auth: false}
         },
+        {
+            name: 'shelve',
+            path: '/books',
+            component: require('./components/Book/List.vue'),
+            meta: {auth: true}
+        }
 
     ];
 

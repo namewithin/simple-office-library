@@ -6,11 +6,18 @@ const debug = process.env.NODE_ENV !== 'production';
 
 const store = new Vuex.Store({
     state: {
-        count: 0
+        count: 0,
+        user: {
+            authenticated: false,
+            profile: null
+        },
     },
-    modules: {},
-    strict: debug
+    actions: {
+        authenticate(){
 
+        }
+    },
+    strict: debug
 });
 
 module.exports = store;
