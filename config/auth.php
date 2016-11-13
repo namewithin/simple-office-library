@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard'     => 'web',
         'passwords' => 'users',
     ],
 
@@ -37,12 +37,12 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
+            'driver'   => 'session',
             'provider' => 'users',
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver'   => 'token',
             'provider' => 'users',
         ],
     ],
@@ -67,9 +67,8 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model'  => App\User::class,
         ],
-
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -91,12 +90,21 @@ return [
     |
     */
 
-    'passwords' => [
+    'passwords'       => [
         'users' => [
             'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
+            'table'    => 'password_resets',
+            'expire'   => 60,
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Trusted Domains
+    |--------------------------------------------------------------------------
+    | These domains is available for authorization. Authorized user can be only
+    | from these domain.
+    |
+    */
+    'trusted_domains' => ['pdffiller.com', 'pdffiller.team', 'support.pdffiller.com']
 ];

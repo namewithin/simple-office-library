@@ -4,23 +4,31 @@ import {API_ROOT} from '../config';
 
 Vue.use(VueResource);
 
-Vue.http.options.crossOrigin = true;
 Vue.http.options.credentials = true;
 
-Vue.http.interceptors.push((request, next)=> {
-    request.headers = request.headers || {};
-    if (localStorage.getItem('token')) {
-        request.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
-    }
-    next((response) => {
+Vue.http.headers.common['X-CSRF-TOKEN'] = document.getElementsByName('csrf-token')[0].getAttribute('content');
+
+// Vue.http.interceptors.push((request, next)=> {
+//     request.headers = request.headers || {};
+//     if (localStorage.getItem('token')) {
+//         request.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+//     }
+//     next((response) => {
+//         if (response.status === 401) {
+//             localStorage.clear();
+//             Vue.router.push('login');
+//         }
+//     })
+// });
+Vue.http.interceptors.push({
+    response: function (response) {
         if (response.status === 401) {
-            localStorage.clear();
-            Vue.router.push('login');
+            this.$store.dispatch('logout');
+            this.$router.go('/');
         }
-    })
+        return response;
+    }
 });
 
-export const UserResource = Vue.resource(API_ROOT + 'users{/id}');
-export const AuthResource = Vue.resource(API_ROOT + 'auth{/id}');
-export const BookResource = Vue.resource(API_ROOT + 'book{/id}');
-export const TagResource = Vue.resource(API_ROOT + 'tag{/id}');
+
+export const BookResource = Vue.resource(API_ROOT + '/book{/id}');

@@ -14,7 +14,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return Book::paginate(20);
+        return Book::paginate(4);
     }
 
     /**

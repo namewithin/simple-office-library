@@ -11,13 +11,18 @@
 |
 */
 
+//oAuth
+Route::get('auth', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('login', function () {
+    return view('login');
+});
+Route::get('logout', 'Auth\AuthController@logout');
+
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');
 
-Route::post('/auth/callback', function () {
-    print_r($_POST);
-});
 Route::get('/auth/user', function () {
     return [
         'name'  => 'leo',
