@@ -11,13 +11,19 @@ const store = new Vuex.Store({
         user: {
             profile: null
         },
-        books: []
+        books: [],
+        currentBook: null
     },
     actions: {
         fetchBooks(store) {
             api.getBooksPage().then(response => {
                 store.commit('CLEAR_BOOKS');
                 store.commit('ADD_BOOKS', response.data.data)
+            });
+        },
+        fetchBook(store, id){
+            api.getBook(id).then(response => {
+                store.commit('ADD_BOOK', response.data)
             });
         }
     },
@@ -29,6 +35,9 @@ const store = new Vuex.Store({
             _.forEach(books, function (book) {
                 state.books.push(book)
             })
+        },
+        ADD_BOOK(state, book){
+            state.currentBook = book;
         },
 
     },

@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    public function pictures()
-    {
-        return $this->hasMany(Picture::class);
-    }
+    protected $fillable = ['title', 'description', 'avatar'];
+//    public function pictures()
+//    {
+//        return $this->hasMany(Picture::class);
+//    }
 }

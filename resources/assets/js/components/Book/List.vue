@@ -4,11 +4,11 @@
             <div v-for="book in books" class="column">
                 <div class="ui card">
                     <div class="image">
-                        <img src="/images/kristy.png">
+                        <img v-bind:src="book.avatar">
                     </div>
                     <div class="content">
                         <a class="header">
-                            <router-link :to="{ name: 'single-book', params: { id: book.id }}">{{book.name}}
+                            <router-link :to="{ name: 'single-book', params: { id: book.id }}">{{book.title}}
                             </router-link>
                         </a>
                         <div class="meta">
