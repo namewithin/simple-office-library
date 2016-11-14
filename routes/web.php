@@ -21,7 +21,7 @@ Route::get('logout', 'Auth\AuthController@logout');
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('auth');
+})->middleware(['auth']);
 
 Route::get('/auth/user', function () {
     return [

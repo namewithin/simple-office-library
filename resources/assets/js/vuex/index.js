@@ -8,9 +8,7 @@ const debug = process.env.NODE_ENV !== 'production';
 
 const store = new Vuex.Store({
     state: {
-        count: 0,
         user: {
-            authenticated: false,
             profile: null
         },
         books: []
@@ -18,13 +16,14 @@ const store = new Vuex.Store({
     actions: {
         fetchBooks(store) {
             api.getBooksPage().then(response => {
+                store.commit('CLEAR_BOOKS');
                 store.commit('ADD_BOOKS', response.data.data)
             });
         }
     },
     mutations: {
-        AUTHENTICATE(state, bool) {
-            state.user.authenticated = bool
+        CLEAR_BOOKS(state){
+            state.books = [];
         },
         ADD_BOOKS(state, books){
             _.forEach(books, function (book) {

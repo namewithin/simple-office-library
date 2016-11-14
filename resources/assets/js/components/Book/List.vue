@@ -7,7 +7,10 @@
                         <img src="/images/kristy.png">
                     </div>
                     <div class="content">
-                        <a class="header">{{book.name}}</a>
+                        <a class="header">
+                            <router-link :to="{ name: 'single-book', params: { id: book.id }}">{{book.name}}
+                            </router-link>
+                        </a>
                         <div class="meta">
                             <span class="date">added on {{book.created_at}}</span>
                         </div>

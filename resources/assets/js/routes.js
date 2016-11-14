@@ -9,7 +9,6 @@ const routes =
         {
             name: 'home',
             path: '/',
-            exact: true,
             component: require('./components/Book/List.vue'),
             meta: {auth: false}
         },
@@ -17,6 +16,18 @@ const routes =
             name: 'shelve',
             path: '/books',
             component: require('./components/Book/List.vue'),
+            meta: {auth: true}
+        },
+        {
+            name: 'single-book',
+            path: '/books/:id(\\d+)', //numbers only
+            component: require('./components/Book/Item.vue'),
+            meta: {auth: true}
+        },
+        {
+            name: 'create-book',
+            path: '/books/create',
+            component: require('./components/Book/Create.vue'),
             meta: {auth: true}
         }
 

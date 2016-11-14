@@ -2,7 +2,8 @@
     <div class="container" style="padding-left:30px; padding-right:20px; padding-top:6px">
         <div class="ui secondary  menu">
             <a class="item active">
-                books
+                <router-link :to="{ name: 'shelve' }">books
+                </router-link>
             </a>
             <a class="disabled item">
                 request
@@ -11,7 +12,8 @@
                 folks reading
             </a>
             <a class="item">
-                create new (admin)
+                <router-link :to="{ name: 'create-book'}">create new
+                </router-link>
             </a>
             <div class="right menu">
                 <div class="disabled item">
@@ -21,7 +23,7 @@
                     </div>
                 </div>
                 <a class="ui item">
-                    <button class="ui secondary button">Logout</button>
+                    <button class="ui secondary button"><a href="/logout">Logout</a></button>
                 </a>
             </div>
         </div>
@@ -31,22 +33,14 @@
 <style>
 </style>
 <script>
-    import auth from '../auth'
 
     export default{
         data() {
             return {}
         },
         created() {
-            var self = this;
         },
-        methods: {
-            logout() {
-                this.$store.dispatch('logout');
-                localStorage.removeItem('id_token');
-                this.$router.push('books');
-            },
-        },
+        methods: {},
         computed: {
             authenticated(){
                 return this.$store.state.user.authenticated
