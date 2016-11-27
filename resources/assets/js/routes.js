@@ -20,8 +20,14 @@ const routes =
         },
         {
             name: 'request',
+            path: '/books/request/new',
+            component: require('./components/Book/NewRequest.vue'),
+            meta: {auth: true}
+        },
+        {
+            name: 'requestsList',
             path: '/books/request',
-            component: require('./components/Book/Request.vue'),
+            component: require('./components/Book/Requests.vue'),
             meta: {auth: true}
         },
         {

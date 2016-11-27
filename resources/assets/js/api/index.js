@@ -1,4 +1,4 @@
-import {BookResource} from './resources';
+import {BookResource, RequestResource} from './resources';
 
 export default {
     getBooksPage: function () {
@@ -6,5 +6,9 @@ export default {
     },
     getBook: function (id) {
         return BookResource.get({id: id})
+    },
+    createBookRequest: function (data) {
+        return RequestResource.save({data})
     }
+
 }
