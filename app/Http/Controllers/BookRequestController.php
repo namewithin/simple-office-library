@@ -18,7 +18,7 @@ class BookRequestController extends Controller
         try {
             $bookRequest->save();
         } catch (\Exception $e) {
-            Log::error('couldnt save.' . $e);
+            Log::error($e);
         }
 
 

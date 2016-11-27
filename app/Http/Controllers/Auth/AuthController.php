@@ -2,57 +2,85 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
-use Illuminate\Contracts\Auth\Guard;
+use Carbon\Carbon;
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use App\User;
 
 class AuthController extends Controller
 {
-    protected $auth;
-
-    public function __construct(Guard $auth)
+    public function __construct()
     {
-        $this->auth = $auth;
+        $this->middleware('guest', ['except' => ['logout', 'signin']]);
+    }
 
+    public function index()
+    {
+        return view('login');
     }
 
     /**
-     * Redirect the user to the GitHub authentication page.
+     * Log the user out of the application.
      *
-     * @return Response
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function redirectToProvider()
+    public function logout(Request $request)
     {
-        return Socialite::driver('google')->redirect();
-    }
+        Auth::logout();
 
-    /**
-     * Obtain the user information from GitHub.
-     *
-     * @return Response
-     */
-    public function handleProviderCallback(Request $request)
-    {
-        if (Auth::user()) return redirect('/');
-        $oauthUser = Socialite::driver('google')->stateless()->user();
-        preg_match('/@(.+)$/', $oauthUser->getEmail(), $matches);
-        if (in_array($matches[1], config('auth.trusted_domains'))) {
-            $user = User::where('email', $oauthUser->getEmail())->first();
-            if (!$user) {
-                $user = new User;
-                $user->email = $oauthUser->getEmail();
-                $user->name = $oauthUser->getName();
-                preg_match('/^(.+)@/', $oauthUser->getEmail(), $matches);
-                $user->save();
+        if ($request->ajax()) {
+            if ($request->headers->has('authorization')) {
+                JWTAuth::parseToken()->invalidate();
             }
 
-            return $this->login($user->id, true);
+            return response()->json([]);
         }
 
         return redirect('/');
+    }
+
+    /**
+     * Redirect to provider auth page
+     *
+     * @param $provider
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function redirectToProvider($provider = 'google')
+    {
+        return Socialite::with($provider)->redirect();
+    }
+
+    public function handleProviderCallback($provider = 'google')
+    {
+        try {
+            $user = Socialite::driver($provider)->user();
+        } catch (\Exception $e) {
+            return redirect('login');
+        }
+
+        preg_match('/@(.+)$/', $user->email, $matches);
+        if (in_array($matches[1], config('oauth2.domain'))) {
+            $loginUser = User::where('email', $user->email)->first();
+            //register new user
+            if (!$loginUser) {
+                $loginUser = new User;
+                $loginUser->email = $user->email;
+                $loginUser->name = $user->name;
+                $loginUser->save();
+            }
+
+            return $this->login($loginUser->id);
+        }
+
+        return redirect('login');
     }
 
     /**
@@ -65,20 +93,35 @@ class AuthController extends Controller
      */
     protected function login($id, $remember = false)
     {
-        $this->auth->loginUsingId($id, $remember);
-
-        return redirect('#/books');
-    }
-
-    /**
-     * Log the user out of the application.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function logout()
-    {
-        Auth::logout();
+        Auth::loginUsingId($id);
 
         return redirect('/');
     }
+
+    public function signin(Request $request)
+    {
+        return response()->json(
+            Auth::user(), 200
+        );
+        if (Auth::check()) {
+            $user = Auth::user();
+            $token = JWTAuth::fromUser($user);
+            $data = [];
+            $meta = [];
+
+            $data['name'] = $request->user();
+            $meta['token'] = $token;
+
+            return response()->json([
+                'data' => $data,
+                'meta' => $meta
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'Could not authenticate',
+            ], 401);
+        }
+    }
 }
+
+

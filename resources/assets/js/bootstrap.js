@@ -7,12 +7,24 @@ if (window.$ === undefined || window.jQuery === undefined) {
 
 window.Vue = require('vue');
 require('vue-resource');
-require('bootstrap-sass');
 
 
 Vue.http.interceptors.push((request, next) => {
-    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
-    next();
+    if (_.isEmpty(localStorage.getItem('id_token'))) {
+        if (request.url === 'signin') {
+            next();
+        } else {
+            location.reload();
+        }
+    } else {
+        request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+        request.headers.set('JWTAuthorization', 'Bearer ' + localStorage.getItem('id_token'));
+        next(response=> {
+            if (response.status == 401) {
+                window.location.href = 'https://library.dev'
+            }
+        });
+    }
 });
 
 import noty from 'noty'

@@ -11,21 +11,16 @@
 |
 */
 
+Route::get('signin', 'Auth\AuthController@signin');
 //oAuth
-Route::get('auth', 'Auth\AuthController@redirectToProvider');
-Route::get('auth/callback', 'Auth\AuthController@handleProviderCallback');
 Route::get('login', function () {
     return view('login');
 });
 Route::get('logout', 'Auth\AuthController@logout');
+Route::get('auth/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('auth', 'Auth\AuthController@redirectToProvider');
+
 
 Route::get('/', function () {
     return view('welcome');
 })->middleware(['auth']);
-
-Route::get('/auth/user', function () {
-    return [
-        'name'  => 'leo',
-        'email' => 'leo@pdffiller.com'
-    ];
-});

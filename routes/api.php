@@ -1,9 +1,14 @@
 <?php
 
-use Illuminate\Http\Request;
+Route::get('signin', 'Auth\AuthController@signin');
 
-Route::resource('book', 'BookController');
+Route::group([
+    'middleware' => ['jwt.header', 'jwt.auth']
+], function () {
+    Route::post('upload', 'FileController@upload');
 
-Route::post('upload', 'FileController@upload');
+    Route::resource('book/request', 'BookRequestController');
 
-Route::resource('book/request', 'BookRequestController');
+    Route::resource('book', 'BookController');
+
+});
