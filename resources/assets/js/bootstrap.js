@@ -15,6 +15,8 @@ Vue.http.interceptors.push((request, next) => {
     next();
 });
 
+import noty from 'noty'
+
 import Echo from "laravel-echo"
 
 // window.Echo = new Echo({

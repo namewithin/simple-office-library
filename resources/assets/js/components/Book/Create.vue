@@ -30,7 +30,8 @@
                             <!--<div class="ui text loader">working. {{avatar.progress}}%</div>-->
                             <!--</div>-->
                         </div>
-                        <button class="ui button green" v-bind:class="{disabled: !complete}" @click="save" type="submit">save it!
+                        <button class="ui button green" v-bind:class="{disabled: !complete}" @click="save"
+                                type="submit">save it!
                         </button>
                     </div>
                 </div>
@@ -111,7 +112,10 @@
         methods: {
             save(){
                 Vue.http.post('api/book', this.book).then((response) => {
-                    console.log(response);
+                    this.$router.push({name: 'shelve'});
+                    noty({text: 'woppie! book added!', timeout: 3000, type: 'success'})
+                }, (response)=> {
+                    noty({text: 'whoops. something went wrong. please contact developers', type: 'alert'})
                 });
             }
         },

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
 {
@@ -14,7 +16,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return Book::paginate(4);
+        return Book::paginate(20);
     }
 
     /**
@@ -24,7 +26,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return response()->json('trueeeee', 200);
     }
 
     /**
@@ -35,11 +37,13 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+
         $book = new Book();
         $book->fill($request->all());
+        $book->published_at = Carbon::now();
         $book->save();
 
-        return $book;
+        return response()->json(request()->all(), 200);
     }
 
     /**

@@ -5,7 +5,7 @@
                 <router-link :to="{ name: 'shelve' }">books
                 </router-link>
             </a>
-            <a class="disabled item">
+            <a class="item">
                 request
             </a>
             <a class="disabled item">
