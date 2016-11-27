@@ -14,7 +14,7 @@ Vue.http.interceptors.push((request, next) => {
         if (request.url === 'signin') {
             next();
         } else {
-            location.reload();
+            // location.reload();
         }
     } else {
         request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
@@ -29,7 +29,7 @@ Vue.http.interceptors.push((request, next) => {
 
 import noty from 'noty'
 
-import Echo from "laravel-echo"
+// import Echo from "laravel-echo"
 
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',

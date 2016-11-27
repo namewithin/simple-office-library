@@ -1,6 +1,5 @@
 <?php
 
-Route::get('signin', 'Auth\AuthController@signin');
 
 Route::group([
     'middleware' => ['jwt.header', 'jwt.auth']

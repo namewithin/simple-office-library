@@ -13,7 +13,7 @@ var router = new VueRouter({
 
 Vue.component('main-component', require('./components/Main.vue'));
 
-Vue.http.options.root = API_ROOT;
+// Vue.http.options.root = API_ROOT;
 
 localStorage.clear();
 Vue.http.get('signin').then(response => {

@@ -2,85 +2,60 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Carbon\Carbon;
-
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\User;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\User;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('guest', ['except' => ['logout', 'signin']]);
-    }
+    protected $auth;
 
-    public function index()
+    public function __construct(Guard $auth)
     {
-        return view('login');
+        $this->auth = $auth;
+
     }
 
     /**
-     * Log the user out of the application.
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
      *
      * @param Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return Response
      */
-    public function logout(Request $request)
+    public function handleProviderCallback()
     {
-        Auth::logout();
-
-        if ($request->ajax()) {
-            if ($request->headers->has('authorization')) {
-                JWTAuth::parseToken()->invalidate();
+        if (Auth::user()) {
+            return redirect('/');
+        }
+        $oauthUser = Socialite::driver('google')->user();
+        preg_match('/@(.+)$/', $oauthUser->email, $matches);
+        if (in_array($matches[1], config('auth.trusted_domains'))) {
+            $user = User::where('email', $oauthUser->email)->first();
+            if (!$user) {
+                $user = new User;
+                $user->email = $oauthUser->email;
+                $user->name = $oauthUser->name;
+                $user->save();
             }
 
-            return response()->json([]);
+            $this->login($user->id, true);
         }
 
         return redirect('/');
-    }
-
-    /**
-     * Redirect to provider auth page
-     *
-     * @param $provider
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function redirectToProvider($provider = 'google')
-    {
-        return Socialite::with($provider)->redirect();
-    }
-
-    public function handleProviderCallback($provider = 'google')
-    {
-        try {
-            $user = Socialite::driver($provider)->user();
-        } catch (\Exception $e) {
-            return redirect('login');
-        }
-
-        preg_match('/@(.+)$/', $user->email, $matches);
-        if (in_array($matches[1], config('oauth2.domain'))) {
-            $loginUser = User::where('email', $user->email)->first();
-            //register new user
-            if (!$loginUser) {
-                $loginUser = new User;
-                $loginUser->email = $user->email;
-                $loginUser->name = $user->name;
-                $loginUser->save();
-            }
-
-            return $this->login($loginUser->id);
-        }
-
-        return redirect('login');
     }
 
     /**
@@ -93,16 +68,13 @@ class AuthController extends Controller
      */
     protected function login($id, $remember = false)
     {
-        Auth::loginUsingId($id);
+        $this->auth->loginUsingId($id, $remember);
 
-        return redirect('/');
+        return redirect('#/books');
     }
 
     public function signin(Request $request)
     {
-        return response()->json(
-            Auth::user(), 200
-        );
         if (Auth::check()) {
             $user = Auth::user();
             $token = JWTAuth::fromUser($user);
@@ -122,6 +94,16 @@ class AuthController extends Controller
             ], 401);
         }
     }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect('/');
+    }
 }
-
-
