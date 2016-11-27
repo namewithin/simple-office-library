@@ -1,27 +1,30 @@
 <template>
     <div>
-        <header-component/>
-        <div>this is template body</div>
-        <other-component/>
+        <h2>I wanna request a book:</h2>
+        <div class="ui form segment">
+            <div class="field">
+                <label>book title</label>
+                <input placeholder="title" type="text">
+            </div>
+            <div class="field">
+                <label>author</label>
+                <input placeholder="author name" type="text">
+            </div>
+            <div class="ui submit button">submit</div>
+        </div>
     </div>
 </template>
 <style>
-    body{
-        background-color:#ff0000;
-    }
 </style>
 <script>
-    import HeaderComponent from './components/header.vue'
-    import OtherComponent from './components/other.vue'
     export default{
         data(){
-            return{
-                msg:'hello vue'
+            return {
+                book: {
+                    name: null,
+                    author: null,
+                }
             }
         },
-        components:{
-            'other-component':OtherComponent,
-            HeaderComponent,
-        }
     }
 </script>

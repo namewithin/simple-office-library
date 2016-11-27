@@ -1,20 +1,18 @@
 <template>
     <div class="container" style="padding-left:30px; padding-right:20px; padding-top:6px">
         <div class="ui secondary  menu">
-            <a class="item active">
-                <router-link :to="{ name: 'shelve' }">books
-                </router-link>
-            </a>
-            <a class="item">
-                request
-            </a>
+            <router-link class="item" :to="{ name: 'shelve' }" exact>books
+            </router-link>
+            <router-link class="item" :to="{ name: 'request'}" exact>request
+            </router-link>
+
             <a class="disabled item">
                 folks reading
             </a>
-            <a class="item">
-                <router-link :to="{ name: 'create-book'}">create new
-                </router-link>
-            </a>
+
+            <router-link class="item" :to="{ name: 'create-book'}" exact>create new
+            </router-link>
+
             <div class="right menu">
                 <div class="disabled item">
                     <div class="ui icon input">

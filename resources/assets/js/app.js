@@ -8,7 +8,8 @@ import routes from './routes';
 
 var router = new VueRouter({
     routes,
-    history: true
+    history: true,
+    linkActiveClass: 'active'
 });
 
 Vue.component('main-component', require('./components/Main.vue'));

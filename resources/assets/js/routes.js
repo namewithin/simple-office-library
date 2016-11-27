@@ -19,6 +19,12 @@ const routes =
             meta: {auth: true}
         },
         {
+            name: 'request',
+            path: '/books/request',
+            component: require('./components/Book/Request.vue'),
+            meta: {auth: true}
+        },
+        {
             name: 'single-book',
             path: '/books/:id(\\d+)', //numbers only
             component: require('./components/Book/Item.vue'),
