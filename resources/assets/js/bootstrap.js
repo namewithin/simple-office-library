@@ -14,14 +14,14 @@ Vue.http.interceptors.push((request, next) => {
         if (request.url === 'signin') {
             next();
         } else {
-            // location.reload();
+            location.reload();
         }
     } else {
         request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
         request.headers.set('JWTAuthorization', 'Bearer ' + localStorage.getItem('id_token'));
         next(response=> {
             if (response.status == 401) {
-                window.location.href = 'https://library.dev'
+                window.location.href = 'http://library.dev'
             }
         });
     }

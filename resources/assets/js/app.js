@@ -17,7 +17,6 @@ Vue.component('main-component', require('./components/Main.vue'));
 
 localStorage.clear();
 Vue.http.get('signin').then(response => {
-    console.log('SUCCESS', response);
     localStorage.setItem('id_token', response.data.meta.token);
     const app = new Vue({
         el: '#app',
@@ -25,5 +24,4 @@ Vue.http.get('signin').then(response => {
         store
     });
 }, response => {
-    console.log('ERROR', response);
 });
