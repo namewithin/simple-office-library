@@ -54,6 +54,9 @@ class AuthController extends Controller
 
             $this->login($user->id, true);
         }
+        if (\Auth::check() == false) {
+            session()->regenerate();
+        }
 
         return redirect('/');
     }

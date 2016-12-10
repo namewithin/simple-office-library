@@ -1,14 +1,17 @@
 import {BookResource, RequestResource} from './resources';
 
 export default {
-    getBooksPage: function () {
+    getBooksPage() {
         return BookResource.get();
     },
-    getBook: function (id) {
+    getBook(id) {
         return BookResource.get({id: id})
     },
-    createBookRequest: function (data) {
+    createBookRequest(data) {
         return RequestResource.save({data})
+    },
+    getRequestedBooks(){
+        return RequestResource.get();
     }
 
 }

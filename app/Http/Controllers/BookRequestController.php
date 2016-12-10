@@ -21,7 +21,11 @@ class BookRequestController extends Controller
             Log::error($e);
         }
 
-
         return response()->json($request->all(), 200);
+    }
+
+    public function index()
+    {
+        return BookRequest::paginate(20);
     }
 }
