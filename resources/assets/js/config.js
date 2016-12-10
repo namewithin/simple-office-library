@@ -1,3 +1,2 @@
-export const API_ROOT = (process.env.NODE_ENV === 'production')
-    ? 'https://library.within.name/api'
-    : 'https://library.dev/api';
+export const API_ROOT =
+     'http://library.within.name/api'
