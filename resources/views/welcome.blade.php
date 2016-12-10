@@ -13,7 +13,8 @@
 </div>
 <script>
     window.Laravel = {
-        csrfToken: "{{ csrf_token() }}"
+        csrfToken: "{{ csrf_token() }}",
+        apiRoot: "{{env('API_URL','https://library.dev')}}"
     };
 </script>
 
