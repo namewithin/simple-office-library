@@ -1,25 +1,35 @@
 <template>
     <div>
         <h2>List of requests</h2>
+        <div v-bind:class="{active: !loaded}" class="ui text loader">Loading</div>
         {{this.requests}}
         <table class="ui single line table">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Registration Date</th>
-                <th>E-mail address</th>
-                <th>Premium Plan</th>
+                <th>boot title</th>
+                <th>requested by</th>
+                <th class="right aligned">actions</th>
             </tr>
             </thead>
+
             <tbody>
+
             <tr v-for="request in requests">
-                <td>{{request.user_id}}</td>
                 <td>{{request.title}}</td>
-                <!--<td>{{request.</td>-->
-                <td>jilsewris22@yahoo.com</td>
-                <td>Yes</td>
+                <td><strong>{{request.user.name}}</strong>
+                    <span v-timeago:timeago=request.created_at></span></td>
+                <td class="right aligned">
+                    <button class="ui primary button">
+                        okay
+                    </button>
+                    <button class="ui button" @click="remove(request.id)">
+                        discard
+                    </button>
+                </td>
             </tr>
+
             </tbody>
+
         </table>
 
     </div>
@@ -28,6 +38,7 @@
 </style>
 <script>
     import api from '../../api'
+    import timeago from '../../directives/timeago'
 
     export default{
         data(){
@@ -35,10 +46,19 @@
                 requests: null
             }
         },
+        computed:{
+            loaded(){
+                if (this.requests) return true;
+                return false;
+            }
+        },
         created(){
             this.fetch()
         },
         methods: {
+            remove(id){
+                this.requests = _.reject(this.requests, {id: id} ) //todo make remove
+            },
             fetch(){
                 api.getRequestedBooks().then(response=> {
                     this.requests = response.data.data;
@@ -46,4 +66,19 @@
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
