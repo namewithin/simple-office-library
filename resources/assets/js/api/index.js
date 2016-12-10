@@ -5,13 +5,16 @@ export default {
         return BookResource.get();
     },
     getBook(id) {
-        return BookResource.get({id: id})
+        return BookResource.get({id: id});
     },
     createBookRequest(data) {
-        return RequestResource.save({data})
+        return RequestResource.save({data});
     },
     getRequestedBooks(){
         return RequestResource.get();
+    },
+    deleteRequestedBook(id){
+        return RequestResource.delete({id: id});
     }
 
 }

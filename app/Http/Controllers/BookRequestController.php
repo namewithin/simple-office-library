@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BookRequest;
 use App\Http\Requests\BookRequestRequest;
+use Carbon\Carbon;
 use Illuminate\Contracts\Logging\Log;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,5 +28,12 @@ class BookRequestController extends Controller
     public function index()
     {
         return BookRequest::with('user')->paginate(20);
+    }
+
+    public function destroy($id)
+    {
+        BookRequest::findOrFail($id)->delete();
+
+        return response()->json(null, 204);
     }
 }

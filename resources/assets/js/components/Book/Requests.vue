@@ -2,7 +2,6 @@
     <div>
         <h2>List of requests</h2>
         <div v-bind:class="{active: !loaded}" class="ui text loader">Loading</div>
-        {{this.requests}}
         <table class="ui single line table">
             <thead>
             <tr>
@@ -57,7 +56,11 @@
         },
         methods: {
             remove(id){
-                this.requests = _.reject(this.requests, {id: id} ) //todo make remove
+                api.deleteRequestedBook(id).then(response=>{
+                console.log(response);
+                    this.requests = _.reject(this.requests, {id: id} ) //todo make remove
+                });
+
             },
             fetch(){
                 api.getRequestedBooks().then(response=> {
@@ -66,6 +69,9 @@
             }
         }
     }
+
+
+
 
 
 
