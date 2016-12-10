@@ -13,9 +13,9 @@
             </thead>
             <tbody>
             <tr v-for="request in requests">
-                <td>{{request.}}</td>
+                <td>{{request.user_id}}</td>
                 <td>{{request.title}}</td>
-                <td></td>
+                <!--<td>{{request.</td>-->
                 <td>jilsewris22@yahoo.com</td>
                 <td>Yes</td>
             </tr>
