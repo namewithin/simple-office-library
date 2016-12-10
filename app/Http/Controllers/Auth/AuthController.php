@@ -41,7 +41,7 @@ class AuthController extends Controller
         if (Auth::user()) {
             return redirect('/');
         }
-        $oauthUser = Socialite::driver('google')->user();
+        $oauthUser = Socialite::driver('google')->stateless()->user();
         preg_match('/@(.+)$/', $oauthUser->email, $matches);
         if (in_array($matches[1], config('auth.trusted_domains'))) {
             $user = User::where('email', $oauthUser->email)->first();
