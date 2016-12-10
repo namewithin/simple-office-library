@@ -41,7 +41,13 @@ const routes =
             path: '/books/create',
             component: require('./components/Book/Create.vue'),
             meta: {auth: true}
-        }
+        },
+        {
+            name: 'create-book-from-request',
+            path: '/books/create/:id(\\d+)',
+            component: require('./components/Book/Create.vue'),
+            meta: {auth: true}
+        },
 
     ];
 
