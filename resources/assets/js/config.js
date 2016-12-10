@@ -1,2 +1,1 @@
-export const API_ROOT =
-    'http://library.within.name/api';
+export const API_ROOT = 'http://library.within.name/api';

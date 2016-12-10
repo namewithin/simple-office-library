@@ -30,6 +30,5 @@ Vue.http.interceptors.push({
     }
 });
 
-
 export const BookResource = Vue.resource(API_ROOT + '/book{/id}');
 export const RequestResource = Vue.resource(API_ROOT + '/book/request{/id}');
