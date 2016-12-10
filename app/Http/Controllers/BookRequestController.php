@@ -26,6 +26,6 @@ class BookRequestController extends Controller
 
     public function index()
     {
-        return BookRequest::paginate(20);
+        return BookRequest::with('user')->paginate(20);
     }
 }
