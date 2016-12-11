@@ -42,7 +42,7 @@ class BookPolicy
      */
     public function update(User $user, Book $book)
     {
-        //
+
     }
 
     /**

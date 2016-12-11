@@ -18,8 +18,6 @@
         </div>
     </div>
 </template>
-<style>
-</style>
 <script>
     import api from '../../api'
     export default{
@@ -42,4 +40,5 @@
             }
         }
     }
+
 </script>

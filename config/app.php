@@ -169,6 +169,10 @@ return [
 
         Laravel\Socialite\SocialiteServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
+        Illuminate\Auth\AuthServiceProvider::class,
+        Kodeine\Acl\AclServiceProvider::class,
+
 
         /*
          * Application Service Providers...

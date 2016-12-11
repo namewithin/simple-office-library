@@ -5,6 +5,8 @@
             </router-link>
             <router-link class="item" :to="{ name: 'request'}" exact>request
             </router-link>
+            <router-link class="item" :to="{ name: 'requestsList'}" exact>current requests
+            </router-link>
 
             <a class="disabled item">
                 folks reading
@@ -25,7 +27,9 @@
                 </a>
             </div>
         </div>
-        <router-view></router-view>
+        <transition>
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 <style>
@@ -45,4 +49,7 @@
             }
         }
     }
+
+
+
 </script>
