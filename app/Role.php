@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Zizaco\Entrust\EntrustRole;
 
-class Role extends EntrustRole
+class Role extends \Kodeine\Acl\Models\Eloquent\Role
 {
     //
 }

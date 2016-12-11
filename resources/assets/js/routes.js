@@ -32,7 +32,7 @@ const routes =
         },
         {
             name: 'single-book',
-            path: '/books/:id(\\d+)', //numbers only
+            path: '/books/view/:id(\\d+)', //numbers only
             component: require('./components/Book/Item.vue'),
             meta: {auth: true}
         },

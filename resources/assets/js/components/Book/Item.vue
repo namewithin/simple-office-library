@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="book">
         <div class="ui items">
             <div class="item">
                 <a class="ui small image">
@@ -32,4 +32,5 @@
             }
         }
     }
+
 </script>

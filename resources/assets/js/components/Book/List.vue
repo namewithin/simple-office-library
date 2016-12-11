@@ -4,7 +4,7 @@
 
             <div class="card" v-for="book in books">
                 <div class="image">
-                    <img v-bind:src="book.avatar">
+                    <img v-bind:src="book.avatar" @click=go(book.id) style="cursor:pointer">
                 </div>
                 <div class="extra">
                     <router-link :to="{ name: 'single-book', params: { id: book.id }}">{{book.title}}
@@ -24,6 +24,11 @@
         },
         created(){
             this.$store.dispatch('fetchBooks');
+        },
+        methods: {
+            go(id){
+                this.$router.push({ name: 'single-book', params: { id: id }})
+            }
         },
         computed: {
             books() {

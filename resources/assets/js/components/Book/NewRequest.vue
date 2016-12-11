@@ -35,10 +35,26 @@
             save(){
                 api.createBookRequest(this.book).then(response=> {
                     this.$router.push({name: 'requestsList'});
-                    noty({text: 'request was submitted, will update you asap.', type: 'success', timeout: 3000})
+
+                    noty({"text":"added. will let you know if something happens.",
+                    "layout":"topRight",
+                    "type":"success",
+                    "textAlign":"center",
+                    "easing":"swing",
+                    "animateOpen":{"height":"toggle"},
+                    "animateClose":{"height":"toggle"},
+                    "speed":"500",
+                    "timeout":"3000",
+                    "closable":false,
+                    "closeOnSelfClick":true
+                    });
                 });
             }
         }
     }
+
+
+
+
 
 </script>

@@ -1,6 +1,7 @@
 <template>
     <div>
         <book-creator v-if="showCreator"></book-creator>
+
         <h2>List of requests</h2>
         <div v-bind:class="{active: !loaded}" class="ui text loader">Loading</div>
         <table class="ui single line table">
@@ -46,7 +47,8 @@
     export default{
         data(){
             return {
-                requests: null
+                requests: null,
+                showCreator: false
             }
         },
         computed:{
@@ -65,6 +67,7 @@
                 });
             },
             submit(id){
+                this.showCreator = !this.showCreator;
 
             },
             fetch(){
@@ -72,26 +75,11 @@
                     this.requests = response.data.data;
                 });
             }
+        },
+        components: {
+            'book-creator':bookCreator
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
