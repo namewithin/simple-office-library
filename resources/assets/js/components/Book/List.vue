@@ -11,6 +11,12 @@
                     </router-link>
                     <div data-rating="4" class="ui star rating"></div>
                 </div>
+                <div class="extra content">
+                    reading now
+                    <div class="right floated author">
+                        <img class="ui avatar image" src="/default-avatar.png"> Matt
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -36,4 +42,6 @@
             }
         }
     }
+
+
 </script>

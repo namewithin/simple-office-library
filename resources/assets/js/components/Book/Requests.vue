@@ -7,8 +7,8 @@
         <table class="ui single line table">
             <thead>
             <tr>
-                <th>boot title</th>
-                <th>boot author</th>
+                <th>title</th>
+                <th>author</th>
                 <th>requested by</th>
                 <th class="right aligned">actions</th>
             </tr>
@@ -80,6 +80,7 @@
             'book-creator':bookCreator
         }
     }
+
 
 
 

@@ -172,6 +172,7 @@ return [
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Kodeine\Acl\AclServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
 
         /*
@@ -234,7 +235,8 @@ return [
 //
         'Socialite'    => Laravel\Socialite\Facades\Socialite::class,
         'JWTAuth'      => Tymon\JWTAuth\Facades\JWTAuth::class,
-        'JWTFactory'   => Tymon\JWTAuth\Facades\JWTFactory::class
+        'JWTFactory'   => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Image'        => Intervention\Image\Facades\Image::class
     ],
 
 ];

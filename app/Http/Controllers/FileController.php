@@ -9,6 +9,7 @@ class FileController extends Controller
 {
     public function upload(Request $request)
     {
+
         $path = $request->file('avatar')->storePublicly('avatars', 'public');
         $result['path'] = $path;
         $result['filename'] = $request->file('avatar')->getFilename();
