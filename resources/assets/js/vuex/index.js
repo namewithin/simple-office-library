@@ -25,6 +25,11 @@ const store = new Vuex.Store({
             api.getBook(id).then(response => {
                 store.commit('ADD_BOOK', response.data)
             });
+        },
+        reserveBook(store, id){
+            api.reserveBook(id).then(response => {
+                store.commit('')
+            });
         }
     },
     mutations: {

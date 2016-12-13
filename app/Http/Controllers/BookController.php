@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Book;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
 {

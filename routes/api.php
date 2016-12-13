@@ -9,6 +9,8 @@ Route::group([
 
     Route::resource('book', 'BookController');
 
+    Route::resource('book.reserve', 'BookReserveController');
+
 });
 
 Route::group([

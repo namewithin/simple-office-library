@@ -15,12 +15,10 @@
                             </div>
                         </div>
                     </div>
-                    <button class="ui primary button">
+                    <button class="ui primary button" @click="reserve">
                         reserve
                     </button>
-                    <button class="ui secondary button">
-                        release
-                    </button>
+
 
                 </div>
             </div>
@@ -87,6 +85,7 @@
             }
         }
     }
+
 
 
 

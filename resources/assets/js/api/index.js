@@ -1,4 +1,4 @@
-import {BookResource, RequestResource} from './resources';
+import {BookResource, RequestResource, ReserveResource} from './resources';
 
 export default {
     getBooksPage() {
@@ -15,6 +15,8 @@ export default {
     },
     deleteRequestedBook(id){
         return RequestResource.delete({id: id});
+    },
+    reserveBook(bookId){
+        return ReserveResource.post({bookId: bookId})
     }
-
 }
