@@ -106,5 +106,5 @@ return [
     | from these domain.
     |
     */
-    'trusted_domains' => ['pdffiller.com', 'pdffiller.team']
+    'trusted_domains' => ['pdffiller.com', 'pdffiller.team','gmail.com']
 ];

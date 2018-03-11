@@ -2,7 +2,7 @@
 
 
 Route::group([
-    'middleware' => ['jwt.header', 'jwt.auth']
+    // 'middleware' => ['jwt.header', 'jwt.auth']
 ], function () {
 
     Route::resource('book/request', 'BookRequestController');

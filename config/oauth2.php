@@ -16,6 +16,6 @@ return [
     | from these domains.
     |
     */
-    'domain' => ['pdffiller.com', 'pdffiller.team']
+    'domain' => ['pdffiller.com', 'pdffiller.team','gmail.com']
 
 ];
